@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
+
 const userSchema = new Schema({
     first_name : {
         type : String,
@@ -18,5 +19,6 @@ const userSchema = new Schema({
         required : true
     }
 })
+
 
 export default mongoose.model('User', userSchema)

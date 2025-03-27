@@ -1,11 +1,16 @@
 import { Router } from 'express'
 import { verifyUser } from '../middlewares/verifyUser.js'
 
-const eventRouter = Router()
+const eventsRouter = Router()
 
-eventRouter.get('/events', verifyUser, (req, res) => {
+
+eventsRouter.get('/events', verifyUser, (req, res) => {
     console.log(req.user)
-    res.send('Welcome to my events' )
+    res.send(`Welcome to my events`)    
 })
 
-export default eventRouter
+
+export default eventsRouter
+
+
+
