@@ -5,7 +5,6 @@ import User from "../models/User.js";
 const JWT_SECRET = process.env.JWT_SECRET
 
 export const createUser = async (req, res) => {
-    console.log(req.body)
     const {first_name, last_name, email, password} = req.body
     try{
         // We search in our DB where the email could match the req.body.email (the email given by the user)
@@ -20,7 +19,8 @@ export const createUser = async (req, res) => {
             first_name,
             last_name,
             email,
-            password : hashedPassword
+            password : hashedPassword,
+            image : '/public/images/' + req.file.filename
         })
 
         newUser.save()

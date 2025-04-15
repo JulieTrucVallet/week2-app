@@ -16,6 +16,20 @@ export const getAllServices = async (req, res) => {
     }
 }
 
+export const getServiceByID = async (req, res) => {
+    const {id} = req.params
+    try{
+        const serviceByID = await Service.findById(id)
+        if(!serviceByID){
+            return res.status
+        }
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json(`Internal server error`, err)
+    }
+}
+
 
 export const createService = async (req, res) => {
     console.log(req.user)
