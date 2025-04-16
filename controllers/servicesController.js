@@ -1,46 +1,36 @@
-import Service from "../models/Service.js";
-
-
+import Service from "../models/Service.js"
 
 export const getAllServices = async (req, res) => {
-    try{
-        const services = await Service.find()
-        if(services.length < 1){
-            return res.status(404).json(`Services not found`)
-        }
-        return res.status(200).json(services)
-    }
-    catch(err){
-        console.log(err)
-        return res.status(500).json(`Internal server error`, err)
-    }
+  try {
+    const services = await Service.find()
+    // Toujours renvoyer une 200 même si vide
+    return res.status(200).json(services)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Internal server error", error: err })
+  }
 }
 
 export const getServiceByID = async (req, res) => {
-    const {id} = req.params
-    try{
-        const serviceByID = await Service.findById(id)
-        if(!serviceByID){
-            return res.status
-        }
+  const { id } = req.params
+  try {
+    const serviceByID = await Service.findById(id)
+    if (!serviceByID) {
+      return res.status(404).json({ message: "Service not found" })
     }
-    catch(err){
-        console.log(err)
-        return res.status(500).json(`Internal server error`, err)
-    }
+    return res.status(200).json(serviceByID)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Internal server error", error: err })
+  }
 }
 
-
 export const createService = async (req, res) => {
-    console.log(req.user)
-    try{
-        const newService = await Service.create(req.body)
-        if(newService){
-            return res.status(201).json(`Your event has been created`)
-        }
-    }
-    catch(err){
-        console.log(err)
-        return res.status(500).json(`Internal server error`, err)
-    }
+  try {
+    const newService = await Service.create(req.body)
+    return res.status(201).json({ message: "Your event has been created", service: newService })
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Internal server error", error: err })
+  }
 }

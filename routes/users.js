@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import { getAllUsers, getUserByID, getUserProfile } from '../controllers/usersController.js'
-
 import { verifyUser } from '../middlewares/verifyUser.js'
 
 
