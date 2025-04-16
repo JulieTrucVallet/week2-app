@@ -26,11 +26,24 @@ export const getServiceByID = async (req, res) => {
 }
 
 export const createService = async (req, res) => {
-  try {
-    const newService = await Service.create(req.body)
-    return res.status(201).json({ message: "Your event has been created", service: newService })
-  } catch (err) {
-    console.log(err)
-    return res.status(500).json({ message: "Internal server error", error: err })
+    try {
+      const { title, description, price, category, address, availability } = req.body
+      const image = req.file ? `/images/${req.file.filename}` : null
+  
+      const newService = await Service.create({
+        title,
+        description,
+        price,
+        category,
+        address,
+        availability,
+        userID: req.user.id,
+        image
+      })
+  
+      return res.status(201).json({ message: "Your event has been created", service: newService })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({ message: "Internal server error", error: err })
+    }
   }
-}

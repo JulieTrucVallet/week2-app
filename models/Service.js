@@ -30,7 +30,11 @@ const serviceSchema = new Schema({
     userID : { 
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
-    }
+    },
+    image: {
+        type: String,
+        required: false
+      }
 })
 
 export default mongoose.model('Service', serviceSchema)

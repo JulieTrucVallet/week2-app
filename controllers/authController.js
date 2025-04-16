@@ -15,13 +15,14 @@ export const createUser = async (req, res) => {
         }
         const saltPassword = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, saltPassword)
+        const imagePath = req.file ? `/images/${req.file.filename}` : '/images/default.jpg'
 
         const newUser = await new User({
             first_name,
             last_name,
             email,
             password : hashedPassword,
-            image : '/public/images/default.jpg'
+            image : imagePath
         })
 
         newUser.save()
