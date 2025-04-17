@@ -39,7 +39,7 @@ export const createService = async (req, res) => {
         category,
         address,
         availability : parsedAvailability,
-        image : req.file ? '/public/images/' + req.file.filename : '/public/images/default_event.jpg',
+        image : req.file ? '/images/' + req.file.filename : '/images/default_event.jpg',
         userID: req.user.id,
       })
       if(newService){
