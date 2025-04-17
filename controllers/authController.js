@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../models/Users.js';
+import User from '../models/User.js';
 
 
 const JWT_SECRET = process.env.JWT_SECRET
@@ -21,7 +21,7 @@ export const createUser = async (req, res) => {
             last_name,
             email,
             password : hashedPassword,
-            image: req.file ? '/public/images/' + req.file.filename : '/public/images/default_user.jpg'
+            image: req.file ? '/public/images/' + req.file.filename : null
         })
 
         newUser.save()
