@@ -27,14 +27,14 @@ const serviceSchema = new Schema({
         type : Boolean,
         required : true
     },
+    image: {
+        type: String
+      },
     userID : { 
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'User'
-    },
-    image: {
-        type: String,
-        required: false
-      }
+        ref : 'User',
+        required : true
+    }
 })
 
 export default mongoose.model('Service', serviceSchema)
