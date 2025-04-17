@@ -29,6 +29,8 @@ export const getServiceByID = async (req, res) => {
 export const createService = async (req, res) => {
     try {
       const { title, description, price, category, address, availability } = req.body
+
+      const parsedAvailability = availability === 'true'
   
       const newService = await Service.create({
         title,
@@ -36,7 +38,7 @@ export const createService = async (req, res) => {
         price,
         category,
         address,
-        availability,
+        availability : parsedAvailability,
         image : req.file ? '/public/images/' + req.file.filename : '/public/images/default_event.jpg',
         userID: req.user.id,
       })
